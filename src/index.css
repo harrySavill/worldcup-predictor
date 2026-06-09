@@ -1,0 +1,94 @@
+/* src/styles/global.css */
+
+/* Theme variables*/
+:root {
+  --bg-dark: #0e1117;
+  --bg-secondary: #161b22;
+  --text-primary: #e6edf3;
+  --text-muted: #9da7b3;
+  --accent: #2cff8f;
+  --accent-hover: #75f5b3;
+  --border-color: #262c36;
+}
+
+/* Reset and base styles */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  font-family: system-ui, -apple-system, BlinkMacSystemFont, sans-serif;
+  background-color: var(--bg-dark);
+  color: var(--text-primary);
+  line-height: 1.6;
+}
+
+/* Common button styles */
+.btn {
+  display: inline-block;
+  padding: 0.9rem 1.6rem;
+  border-radius: 8px;
+  text-decoration: none;
+  font-weight: 600;
+  transition: all 0.2s ease;
+  cursor: pointer;
+}
+
+.btn.primary {
+  background: var(--accent);
+  color: #0b0f14;
+}
+
+.btn.primary:hover {
+  background: var(--accent-hover);
+}
+
+.btn.secondary {
+  border: 1px solid var(--border-color);
+  color: var(--text-primary);
+  background: transparent;
+}
+
+.btn.secondary:hover {
+  border-color: var(--accent);
+  color: var(--accent);
+}
+
+.btn.large {
+  font-size: 1.1rem;
+  padding: 1.1rem 2rem;
+}
+
+/* Google Sign-In button */
+.btn-google {
+  width: 100%;
+  padding: 0.9rem 1.1rem;
+  background: white;
+  color: #000;
+  font-weight: 500;
+  font-size: 1rem;
+  border: 1px solid #dadce0;
+  border-radius: 8px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: background 0.2s, box-shadow 0.2s;
+  cursor: pointer;
+}
+
+.btn-google:hover:not(:disabled) {
+  background: #f8f9fa;
+  box-shadow: 0 1px 3px rgba(0,0,0,0.1);
+}
+
+.btn-google:disabled {
+  opacity: 0.6;
+  cursor: not-allowed;
+}
+
+.btn-google img {
+  height: 18px;
+  margin-right: 12px;
+}
