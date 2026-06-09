@@ -1,0 +1,304 @@
+/* src/pages/styles/Dashboard.css */
+
+/* ── Loading ── */
+.dashboard-loading {
+    min-height: 100vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: var(--bg-dark);
+}
+
+.loading-spinner {
+    width: 36px;
+    height: 36px;
+    border: 3px solid var(--border-color);
+    border-top-color: var(--accent);
+    border-radius: 50%;
+    animation: spin 0.7s linear infinite;
+}
+
+@keyframes spin {
+    to { transform: rotate(360deg); }
+}
+
+/* ── Page shell ── */
+.dashboard-page {
+    min-height: 100vh;
+    background: var(--bg-dark);
+    color: var(--text-primary);
+}
+
+/* ── Header / nav ── */
+.dashboard-header {
+    position: sticky;
+    top: 0;
+    z-index: 10;
+    background: var(--bg-secondary);
+    border-bottom: 1px solid var(--border-color);
+}
+
+.dashboard-header-inner {
+    max-width: 1000px;
+    margin: 0 auto;
+    padding: 0 2rem;
+    height: 64px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.dashboard-logo {
+    font-size: 1.15rem;
+    font-weight: 700;
+    letter-spacing: 0.02em;
+    color: var(--text-primary);
+}
+
+.dashboard-header-right {
+    display: flex;
+    align-items: center;
+    gap: 1.25rem;
+}
+
+.dashboard-username {
+    font-size: 0.9rem;
+    color: var(--text-muted);
+}
+
+.btn-signout {
+    background: transparent;
+    border: 1px solid var(--border-color);
+    color: var(--text-muted);
+    padding: 0.45rem 1rem;
+    border-radius: 6px;
+    font-size: 0.88rem;
+    font-weight: 500;
+    cursor: pointer;
+    transition: border-color 0.2s, color 0.2s;
+}
+
+.btn-signout:hover {
+    border-color: var(--accent);
+    color: var(--accent);
+}
+
+/* ── Main content ── */
+.dashboard-main {
+    max-width: 1000px;
+    margin: 0 auto;
+    padding: 3rem 2rem 5rem;
+    display: flex;
+    flex-direction: column;
+    gap: 3rem;
+}
+
+/* ── Hero ── */
+.dashboard-hero {
+    padding-bottom: 0.5rem;
+    border-bottom: 1px solid var(--border-color);
+}
+
+.dashboard-eyebrow {
+    font-size: 0.8rem;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.1em;
+    color: var(--accent);
+    margin-bottom: 0.6rem;
+}
+
+.dashboard-hero h1 {
+    font-size: 2.4rem;
+    font-weight: 700;
+    line-height: 1.2;
+    margin-bottom: 0.75rem;
+}
+
+.accent-text {
+    color: var(--accent);
+}
+
+.dashboard-subhead {
+    font-size: 1.05rem;
+    color: var(--text-muted);
+    max-width: 520px;
+}
+
+/* ── Primary action cards ── */
+.dashboard-cards {
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr;
+    gap: 1.25rem;
+}
+
+.dash-card {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+    padding: 1.5rem;
+    border-radius: 12px;
+    border: 1px solid var(--border-color);
+    background: var(--bg-secondary);
+    text-decoration: none;
+    color: var(--text-primary);
+    transition: border-color 0.2s, box-shadow 0.2s, transform 0.15s;
+    position: relative;
+}
+
+.dash-card:hover {
+    border-color: var(--accent);
+    box-shadow: 0 0 0 1px var(--accent), 0 8px 24px rgba(44, 255, 143, 0.08);
+    transform: translateY(-2px);
+}
+
+.dash-card--primary {
+    grid-column: 1 / -1;
+    background: linear-gradient(135deg, var(--bg-secondary) 0%, rgba(44, 255, 143, 0.06) 100%);
+    border-color: rgba(44, 255, 143, 0.25);
+}
+
+.dash-card-icon {
+    font-size: 2rem;
+    flex-shrink: 0;
+    line-height: 1;
+}
+
+.dash-card-body {
+    flex: 1;
+}
+
+.dash-card-body h2 {
+    font-size: 1.1rem;
+    font-weight: 600;
+    margin-bottom: 0.3rem;
+}
+
+.dash-card-body p {
+    font-size: 0.9rem;
+    color: var(--text-muted);
+    line-height: 1.5;
+}
+
+.dash-card-arrow {
+    font-size: 1.2rem;
+    color: var(--accent);
+    opacity: 0;
+    transition: opacity 0.2s, transform 0.2s;
+    flex-shrink: 0;
+}
+
+.dash-card:hover .dash-card-arrow {
+    opacity: 1;
+    transform: translateX(4px);
+}
+
+/* ── Stats row ── */
+.dashboard-stats {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 1rem;
+}
+
+.stat-card {
+    background: var(--bg-secondary);
+    border: 1px solid var(--border-color);
+    border-radius: 10px;
+    padding: 1.25rem 1.5rem;
+    display: flex;
+    flex-direction: column;
+    gap: 0.4rem;
+}
+
+.stat-value {
+    font-size: 1.9rem;
+    font-weight: 700;
+    color: var(--accent);
+    line-height: 1;
+}
+
+.stat-label {
+    font-size: 0.82rem;
+    color: var(--text-muted);
+    text-transform: uppercase;
+    letter-spacing: 0.06em;
+}
+
+/* ── Generic section ── */
+.dashboard-section {
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+}
+
+.section-header {
+    display: flex;
+    align-items: baseline;
+    justify-content: space-between;
+}
+
+.section-header h3 {
+    font-size: 1.15rem;
+    font-weight: 600;
+}
+
+/* ── Empty state ── */
+.empty-state {
+    background: var(--bg-secondary);
+    border: 1px dashed var(--border-color);
+    border-radius: 12px;
+    padding: 3rem 2rem;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 1rem;
+    text-align: center;
+}
+
+.empty-icon {
+    font-size: 2.5rem;
+    line-height: 1;
+}
+
+.empty-state p {
+    color: var(--text-muted);
+    font-size: 0.95rem;
+}
+
+/* shared link accent (already in global but redeclare locally for safety) */
+.link-accent {
+    color: var(--accent);
+    text-decoration: none;
+    font-weight: 600;
+    font-size: 0.9rem;
+}
+.link-accent:hover { text-decoration: underline; }
+
+/* ── Responsive ── */
+@media (max-width: 700px) {
+    .dashboard-cards {
+        grid-template-columns: 1fr;
+    }
+
+    .dash-card--primary {
+        grid-column: auto;
+    }
+
+    .dashboard-stats {
+        grid-template-columns: 1fr 1fr;
+    }
+
+    .dashboard-hero h1 {
+        font-size: 1.85rem;
+    }
+
+    .dashboard-main {
+        padding: 2rem 1.25rem 4rem;
+    }
+}
+
+@media (max-width: 400px) {
+    .dashboard-stats {
+        grid-template-columns: 1fr;
+    }
+}

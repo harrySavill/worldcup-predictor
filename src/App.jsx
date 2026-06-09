@@ -4,6 +4,8 @@ import Register from './pages/Register.jsx'
 import Login from './pages/Login.jsx'
 import ForgotPassword from './pages/ForgotPassword.jsx'
 import UpdatePassword from "./pages/UpdatePassword.jsx";
+import Dashboard from './pages/Dashboard.jsx'
+
 function App() {
   return (
       <Routes>
@@ -12,6 +14,7 @@ function App() {
         <Route path="/login" element={<Login />} />
         <Route path="/forgotPassword" element={<ForgotPassword />}  />
         <Route path="/update-password" element={<UpdatePassword />} />
+        <Route path="/dashboard" element={<Dashboard />} />
       </Routes>
   )
 }
