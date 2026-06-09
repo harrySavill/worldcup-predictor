@@ -29,60 +29,6 @@
     color: var(--text-primary);
 }
 
-/* ── Header / nav ── */
-.dashboard-header {
-    position: sticky;
-    top: 0;
-    z-index: 10;
-    background: var(--bg-secondary);
-    border-bottom: 1px solid var(--border-color);
-}
-
-.dashboard-header-inner {
-    max-width: 1000px;
-    margin: 0 auto;
-    padding: 0 2rem;
-    height: 64px;
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-}
-
-.dashboard-logo {
-    font-size: 1.15rem;
-    font-weight: 700;
-    letter-spacing: 0.02em;
-    color: var(--text-primary);
-}
-
-.dashboard-header-right {
-    display: flex;
-    align-items: center;
-    gap: 1.25rem;
-}
-
-.dashboard-username {
-    font-size: 0.9rem;
-    color: var(--text-muted);
-}
-
-.btn-signout {
-    background: transparent;
-    border: 1px solid var(--border-color);
-    color: var(--text-muted);
-    padding: 0.45rem 1rem;
-    border-radius: 6px;
-    font-size: 0.88rem;
-    font-weight: 500;
-    cursor: pointer;
-    transition: border-color 0.2s, color 0.2s;
-}
-
-.btn-signout:hover {
-    border-color: var(--accent);
-    color: var(--accent);
-}
-
 /* ── Main content ── */
 .dashboard-main {
     max-width: 1000px;
