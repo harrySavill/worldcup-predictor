@@ -35,12 +35,7 @@ export default function CreateLeague() {
                 .insert({
                     name: leagueName.trim(),
                     owner_id: user.id,
-                })
-                .select(`
-                    *,
-                    scoring_rules(*)
-                `)
-                .single();
+                });
 
             if (error) throw error;
 
@@ -100,15 +95,6 @@ export default function CreateLeague() {
                                 </button>
                             </form>
 
-                            <div className="form-footer">
-                                <button
-                                    type="button"
-                                    className="link-accent"
-                                    onClick={() => navigate('/leagues/join')}
-                                >
-                                    ← Join an existing league instead
-                                </button>
-                            </div>
                         </>
                     ) : (
                         <div className="success-state">

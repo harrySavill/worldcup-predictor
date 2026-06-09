@@ -8,6 +8,7 @@ import Dashboard from './pages/Dashboard.jsx'
 import CreateLeague from './pages/CreateLeague.jsx'
 import JoinLeague from './pages/JoinLeague.jsx'
 import Leagues from "./pages/Leagues.jsx";
+import GroupStagePredictions from "./pages/GroupStagePredictions.jsx";
 
 function App() {
   return (
@@ -21,6 +22,7 @@ function App() {
         <Route path="leagues" element={<Leagues />} />
         <Route path="/leagues/create" element={<CreateLeague />} />
         <Route path="/leagues/join" element={<JoinLeague />} />
+        <Route path="/predictions" element={<GroupStagePredictions />} />
       </Routes>
   )
 }
