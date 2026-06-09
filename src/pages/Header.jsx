@@ -55,6 +55,13 @@ export default function Header({ activeLink = '' }) {
                 {/* Desktop Navigation */}
                 <nav className="dashboard-nav desktop-only">
                     <Link
+                        to="/dashboard"
+                        className={`nav-link ${activeLink === 'dashboard' ? 'active' : ''}`}
+                        onClick={closeMenu}
+                    >
+                        Dashboard
+                    </Link>
+                    <Link
                         to="/predictions"
                         className={`nav-link ${activeLink === 'predictions' ? 'active' : ''}`}
                         onClick={closeMenu}
@@ -92,6 +99,13 @@ export default function Header({ activeLink = '' }) {
             {/* Mobile Menu */}
             <div className={`mobile-menu ${isMenuOpen ? 'open' : ''}`}>
                 <nav className="mobile-nav">
+                    <Link
+                        to="/dashboard"
+                        className={`mobile-nav-link ${activeLink === 'dashboard' ? 'active' : ''}`}
+                        onClick={closeMenu}
+                    >
+                        Dashboard
+                    </Link>
                     <Link
                         to="/predictions"
                         className={`mobile-nav-link ${activeLink === 'predictions' ? 'active' : ''}`}

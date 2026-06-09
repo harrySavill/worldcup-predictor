@@ -5,6 +5,9 @@ import Login from './pages/Login.jsx'
 import ForgotPassword from './pages/ForgotPassword.jsx'
 import UpdatePassword from "./pages/UpdatePassword.jsx";
 import Dashboard from './pages/Dashboard.jsx'
+import CreateLeague from './pages/CreateLeague.jsx'
+import JoinLeague from './pages/JoinLeague.jsx'
+import Leagues from "./pages/Leagues.jsx";
 
 function App() {
   return (
@@ -15,6 +18,9 @@ function App() {
         <Route path="/forgotPassword" element={<ForgotPassword />}  />
         <Route path="/update-password" element={<UpdatePassword />} />
         <Route path="/dashboard" element={<Dashboard />} />
+        <Route path="leagues" element={<Leagues />} />
+        <Route path="/leagues/create" element={<CreateLeague />} />
+        <Route path="/leagues/join" element={<JoinLeague />} />
       </Routes>
   )
 }

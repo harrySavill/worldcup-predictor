@@ -1,0 +1,210 @@
+/* src/pages/styles/JoinLeague.css */
+.join-league-page {
+    min-height: 100vh;
+    background: var(--bg-dark);
+    color: var(--text-primary);
+}
+
+.join-league-main {
+    max-width: 1000px;
+    margin: 0 auto;
+    padding: 4rem 2rem 6rem;
+}
+
+.join-container {
+    max-width: 480px;
+    margin: 0 auto;
+}
+
+/* Header */
+.page-header {
+    text-align: center;
+    margin-bottom: 3rem;
+}
+
+.page-header h1 {
+    font-size: 2.2rem;
+    font-weight: 700;
+    margin-bottom: 0.75rem;
+}
+
+.page-subhead {
+    font-size: 1.05rem;
+    color: var(--text-muted);
+    max-width: 380px;
+    margin: 0 auto;
+}
+
+/* Form */
+.join-form {
+    background: var(--bg-secondary);
+    border: 1px solid var(--border-color);
+    border-radius: 12px;
+    padding: 2.5rem;
+    display: flex;
+    flex-direction: column;
+}
+
+.form-group {
+    margin-bottom: 1.75rem;
+}
+
+.form-group label {
+    display: block;
+    margin-bottom: 0.5rem;
+    font-weight: 600;
+    font-size: 0.9rem;
+    color: var(--text-primary);
+}
+
+.form-group input {
+    width: 100%;
+    padding: 0.85rem 1rem;
+    background: var(--bg-dark);
+    border: 1px solid var(--border-color);
+    border-radius: 8px;
+    color: var(--text-primary);
+    font-size: 1rem;
+    transition: border-color 0.2s;
+    box-sizing: border-box;
+}
+
+.form-group input:focus {
+    outline: none;
+    border-color: var(--accent);
+}
+
+/* Code input — monospaced and spaced out to feel like entering a code */
+.code-input {
+    font-family: 'Courier New', Courier, monospace !important;
+    font-size: 1.4rem !important;
+    letter-spacing: 0.15em;
+    text-align: center;
+    text-transform: uppercase;
+}
+
+.code-input::placeholder {
+    font-size: 1rem;
+    letter-spacing: 0.05em;
+    opacity: 0.4;
+}
+
+.error-message {
+    color: #ff6b6b;
+    background: rgba(255, 107, 107, 0.1);
+    padding: 0.75rem;
+    border-radius: 8px;
+    margin: 1rem 0;
+    font-size: 0.9rem;
+}
+
+/* Buttons */
+.btn {
+    padding: 0.85rem 1.5rem;
+    border-radius: 8px;
+    font-weight: 600;
+    font-size: 1rem;
+    cursor: pointer;
+    transition: all 0.2s;
+    border: none;
+}
+
+.btn.primary {
+    background: var(--accent);
+    color: #000;
+}
+
+.btn.primary:hover:not(:disabled) {
+    opacity: 0.9;
+    transform: translateY(-1px);
+}
+
+.btn.primary:disabled {
+    opacity: 0.45;
+    cursor: not-allowed;
+}
+
+.btn.secondary {
+    background: transparent;
+    border: 1px solid var(--border-color);
+    color: var(--text-primary);
+}
+
+.btn.secondary:hover {
+    border-color: var(--accent);
+    color: var(--accent);
+}
+
+.btn.large {
+    padding: 1rem 2rem;
+    font-size: 1.05rem;
+}
+
+.form-footer {
+    text-align: center;
+    margin-top: 2rem;
+}
+
+/* Success state */
+.success-state {
+    background: var(--bg-secondary);
+    border: 1px solid var(--border-color);
+    border-radius: 12px;
+    padding: 3rem 2.5rem;
+    text-align: center;
+}
+
+.success-icon {
+    font-size: 4rem;
+    margin-bottom: 1rem;
+}
+
+.success-state h2 {
+    font-size: 1.8rem;
+    margin-bottom: 0.5rem;
+}
+
+.success-league-name {
+    font-size: 1.2rem;
+    font-weight: 700;
+    color: var(--accent);
+    margin-bottom: 0.75rem;
+}
+
+.success-subtext {
+    color: var(--text-muted);
+    font-size: 0.95rem;
+    max-width: 300px;
+    margin: 0 auto;
+}
+
+.success-actions {
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+    margin-top: 2rem;
+}
+
+/* Responsive */
+@media (max-width: 600px) {
+    .join-league-main {
+        padding: 2rem 1.25rem 4rem;
+    }
+
+    .join-container {
+        max-width: 100%;
+    }
+
+    .join-form {
+        padding: 2rem 1.5rem;
+    }
+
+    .page-header h1 {
+        font-size: 1.9rem;
+    }
+
+    .code-input {
+        font-size: 1.2rem !important;
+        letter-spacing: 0.1em;
+    }
+}

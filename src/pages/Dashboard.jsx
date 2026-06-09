@@ -63,6 +63,14 @@ export default function Dashboard() {
                         </div>
                         <span className="dash-card-arrow">→</span>
                     </Link>
+                    <Link to="/leagues" className="dash-card dash-card--secondary">
+                        <div className="dash-card-icon">📋</div>
+                        <div className="dash-card-body">
+                            <h2>Your Leagues</h2>
+                            <p>View the leagues you have already joined.</p>
+                        </div>
+                        <span className="dash-card-arrow">→</span>
+                    </Link>
                     <Link to="/leagues/join" className="dash-card dash-card--secondary">
                         <div className="dash-card-icon">🏆</div>
                         <div className="dash-card-body">
@@ -72,7 +80,7 @@ export default function Dashboard() {
                         <span className="dash-card-arrow">→</span>
                     </Link>
                     <Link to="/leagues/create" className="dash-card dash-card--secondary">
-                        <div className="dash-card-icon">✨</div>
+                        <div className="dash-card-icon">➕</div>
                         <div className="dash-card-body">
                             <h2>Create a League</h2>
                             <p>Start your own league and invite friends to compete.</p>

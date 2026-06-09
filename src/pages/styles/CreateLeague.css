@@ -1,0 +1,205 @@
+/* src/pages/styles/CreateLeague.css */
+
+.create-league-page {
+    min-height: 100vh;
+    background: var(--bg-dark);
+    color: var(--text-primary);
+}
+
+.create-league-main {
+    max-width: 1000px;
+    margin: 0 auto;
+    padding: 4rem 2rem 6rem;
+}
+
+.create-container {
+    max-width: 480px;
+    margin: 0 auto;
+}
+
+/* Header */
+.page-header {
+    text-align: center;
+    margin-bottom: 3rem;
+}
+
+.page-header h1 {
+    font-size: 2.2rem;
+    font-weight: 700;
+    margin-bottom: 0.75rem;
+}
+
+.page-subhead {
+    font-size: 1.05rem;
+    color: var(--text-muted);
+    max-width: 380px;
+    margin: 0 auto;
+}
+
+/* Form */
+.create-form {
+    background: var(--bg-secondary);
+    border: 1px solid var(--border-color);
+    border-radius: 12px;
+    padding: 2.5rem;
+    display: flex;
+    flex-direction: column;
+}
+
+.form-group {
+    margin-bottom: 1.75rem;
+}
+
+.form-group label {
+    display: block;
+    margin-bottom: 0.5rem;
+    font-weight: 600;
+    font-size: 0.9rem;
+    color: var(--text-primary);
+}
+
+.form-group input {
+    width: 100%;
+    padding: 0.85rem 1rem;
+    background: var(--bg-dark);
+    border: 1px solid var(--border-color);
+    border-radius: 8px;
+    color: var(--text-primary);
+    font-size: 1rem;
+    transition: border-color 0.2s;
+}
+
+.form-group input:focus {
+    outline: none;
+    border-color: var(--accent);
+}
+
+.error-message {
+    color: #ff6b6b;
+    background: rgba(255, 107, 107, 0.1);
+    padding: 0.75rem;
+    border-radius: 8px;
+    margin: 1rem 0;
+    font-size: 0.9rem;
+}
+
+/* Success State */
+.success-state {
+    background: var(--bg-secondary);
+    border: 1px solid var(--border-color);
+    border-radius: 12px;
+    padding: 3rem 2.5rem;
+    text-align: center;
+}
+
+.success-icon {
+    font-size: 4rem;
+    margin-bottom: 1rem;
+}
+
+.success-state h2 {
+    font-size: 1.8rem;
+    margin-bottom: 0.5rem;
+}
+
+.invite-box {
+    margin: 2.5rem 0;
+    padding: 1.5rem;
+    background: var(--bg-dark);
+    border: 1px dashed var(--accent);
+    border-radius: 10px;
+}
+
+.invite-label {
+    font-size: 0.85rem;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+    color: var(--text-muted);
+    margin-bottom: 0.5rem;
+}
+
+.invite-code {
+    font-size: 2.1rem;
+    font-weight: 700;
+    letter-spacing: 0.1em;
+    color: var(--accent);
+    background: rgba(44, 255, 143, 0.1);
+    padding: 0.75rem 1rem;
+    border-radius: 8px;
+    user-select: all;
+    word-break: break-all;
+}
+
+.invite-help {
+    margin-top: 1rem;
+    color: var(--text-muted);
+    font-size: 0.9rem;
+}
+
+.success-actions {
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+    margin-top: 2rem;
+}
+
+/* Shared button styles (matching your existing design) */
+.btn {
+    padding: 0.85rem 1.5rem;
+    border-radius: 8px;
+    font-weight: 600;
+    font-size: 1rem;
+    cursor: pointer;
+    transition: all 0.2s;
+    border: none;
+}
+
+.btn.primary {
+    background: var(--accent);
+    color: #000;
+}
+
+.btn.primary:hover {
+    opacity: 0.9;
+    transform: translateY(-1px);
+}
+
+.btn.secondary {
+    background: transparent;
+    border: 1px solid var(--border-color);
+    color: var(--text-primary);
+}
+
+.btn.large {
+    padding: 1rem 2rem;
+    font-size: 1.05rem;
+}
+
+.form-footer {
+    text-align: center;
+    margin-top: 2rem;
+}
+
+/* Responsive */
+@media (max-width: 600px) {
+    .create-league-main {
+        padding: 2rem 1.25rem 4rem;
+    }
+
+    .create-container {
+        max-width: 100%;
+    }
+
+    .create-form {
+        padding: 2rem 1.5rem;
+    }
+
+    .page-header h1 {
+        font-size: 1.9rem;
+
+    }
+    .invite-code {
+        font-size: 1.5rem;
+        letter-spacing: 0.05em;
+    }
+}
