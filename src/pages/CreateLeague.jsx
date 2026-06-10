@@ -30,14 +30,24 @@ export default function CreateLeague() {
                 return;
             }
 
-            const { data, error } = await supabase
+            const { error: insertError } = await supabase
                 .from('leagues')
                 .insert({
                     name: leagueName.trim(),
                     owner_id: user.id,
-                }).select().single();
+                });
 
-            if (error) throw error;
+            if (insertError) throw insertError;
+
+            const { data, error: selectError } = await supabase
+                .from('leagues')
+                .select('*')
+                .eq('owner_id', user.id)
+                .order('created_at', { ascending: false })
+                .limit(1)
+                .single();
+
+            if (selectError) throw selectError;
 
             setSuccessData({
                 league: data,
@@ -94,7 +104,6 @@ export default function CreateLeague() {
                                     {loading ? 'Creating League...' : 'Create League'}
                                 </button>
                             </form>
-
                         </>
                     ) : (
                         <div className="success-state">
