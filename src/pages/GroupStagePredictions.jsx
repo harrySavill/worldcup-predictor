@@ -5,6 +5,9 @@ import { supabase } from '../lib/supabaseClient';
 import Header from './Header';
 import './styles/GroupStagePredictions.css';
 
+// Predictions lock: 6:30pm BST (UTC+1) on June 11th 2026 = 17:30 UTC
+const PREDICTION_DEADLINE = new Date('2026-06-11T17:30:00Z');
+
 // 2026 FIFA World Cup groups
 const GROUPS_DATA = {
     A: ['Mexico', 'South Africa', 'South Korea', 'Czechia'],
@@ -39,7 +42,85 @@ const FLAGS = {
 
 const TOTAL_THIRDS = 8;
 
-function GroupCard({ groupLetter, teams, onChange }) {
+function useDeadlineCountdown() {
+    const [now, setNow] = useState(() => new Date());
+
+    useEffect(() => {
+        // Only tick if deadline hasn't passed yet
+        if (new Date() >= PREDICTION_DEADLINE) return;
+
+        const id = setInterval(() => {
+            const current = new Date();
+            setNow(current);
+            if (current >= PREDICTION_DEADLINE) clearInterval(id);
+        }, 1000);
+
+        return () => clearInterval(id);
+    }, []);
+
+    const isLocked = now >= PREDICTION_DEADLINE;
+    const msRemaining = Math.max(0, PREDICTION_DEADLINE - now);
+
+    const totalSeconds = Math.floor(msRemaining / 1000);
+    const days    = Math.floor(totalSeconds / 86400);
+    const hours   = Math.floor((totalSeconds % 86400) / 3600);
+    const minutes = Math.floor((totalSeconds % 3600) / 60);
+    const seconds = totalSeconds % 60;
+
+    return { isLocked, days, hours, minutes, seconds, msRemaining };
+}
+
+function DeadlineCountdown({ days, hours, minutes, seconds }) {
+    const pad = n => String(n).padStart(2, '0');
+    const showDays = days > 0;
+
+    return (
+        <div className="deadline-banner deadline-banner--open">
+            <span className="deadline-icon">⏱</span>
+            <span className="deadline-label">Predictions close in</span>
+            <div className="deadline-timer">
+                {showDays && (
+                    <>
+                        <span className="timer-unit">
+                            <span className="timer-num">{days}</span>
+                            <span className="timer-sub">d</span>
+                        </span>
+                        <span className="timer-sep">:</span>
+                    </>
+                )}
+                <span className="timer-unit">
+                    <span className="timer-num">{pad(hours)}</span>
+                    <span className="timer-sub">h</span>
+                </span>
+                <span className="timer-sep">:</span>
+                <span className="timer-unit">
+                    <span className="timer-num">{pad(minutes)}</span>
+                    <span className="timer-sub">m</span>
+                </span>
+                <span className="timer-sep">:</span>
+                <span className="timer-unit">
+                    <span className="timer-num">{pad(seconds)}</span>
+                    <span className="timer-sub">s</span>
+                </span>
+            </div>
+            <span className="deadline-date">Locks 6:30 PM BST · Jun 11</span>
+        </div>
+    );
+}
+
+function LockedBanner() {
+    return (
+        <div className="deadline-banner deadline-banner--locked">
+            <span className="deadline-icon">🔒</span>
+            <div className="locked-text">
+                <strong>Predictions are now locked</strong>
+                <span>The group stage is underway — check back once it's done to predict the Round of 32.</span>
+            </div>
+        </div>
+    );
+}
+
+function GroupCard({ groupLetter, teams, onChange, isLocked }) {
     const [order, setOrder] = useState(teams);
     const dragItem = useRef(null);
     const dragOver = useRef(null);
@@ -47,23 +128,27 @@ function GroupCard({ groupLetter, teams, onChange }) {
     const [dragTarget, setDragTarget] = useState(null);
 
     const handleDragStart = (e, idx) => {
+        if (isLocked) return;
         dragItem.current = idx;
         setDragging(idx);
         e.dataTransfer.effectAllowed = 'move';
     };
 
     const handleDragEnter = (e, idx) => {
+        if (isLocked) return;
         e.preventDefault();
         dragOver.current = idx;
         setDragTarget(idx);
     };
 
     const handleDragOver = (e) => {
+        if (isLocked) return;
         e.preventDefault();
         e.dataTransfer.dropEffect = 'move';
     };
 
     const handleDrop = (e) => {
+        if (isLocked) return;
         e.preventDefault();
         if (dragItem.current === null || dragOver.current === null) return;
         if (dragItem.current === dragOver.current) {
@@ -92,7 +177,7 @@ function GroupCard({ groupLetter, teams, onChange }) {
     const positionDesc = ['Advances', 'Advances', 'Maybe', 'Eliminated'];
 
     return (
-        <div className="group-card">
+        <div className={`group-card ${isLocked ? 'group-card--locked' : ''}`}>
             <div className="group-header">
                 <span className="group-letter">Group {groupLetter}</span>
                 <div className="group-legend">
@@ -100,6 +185,7 @@ function GroupCard({ groupLetter, teams, onChange }) {
                     <span className="legend-text">R32</span>
                     <span className="legend-dot" style={{ background: 'var(--qual-third)' }} />
                     <span className="legend-text">TBD</span>
+                    {isLocked && <span className="legend-lock">🔒</span>}
                 </div>
             </div>
             <ul className="team-list" onDragOver={handleDragOver} onDrop={handleDrop}>
@@ -112,8 +198,9 @@ function GroupCard({ groupLetter, teams, onChange }) {
                             ${idx === 3 ? 'eliminated' : ''}
                             ${dragging === idx ? 'dragging' : ''}
                             ${dragTarget === idx && dragging !== idx ? 'drag-over' : ''}
+                            ${isLocked ? 'locked' : ''}
                         `}
-                        draggable
+                        draggable={!isLocked}
                         onDragStart={(e) => handleDragStart(e, idx)}
                         onDragEnter={(e) => handleDragEnter(e, idx)}
                         onDragEnd={handleDragEnd}
@@ -126,7 +213,7 @@ function GroupCard({ groupLetter, teams, onChange }) {
                         <span className="team-status" style={{ color: positionColors[idx] }}>
                             {positionDesc[idx]}
                         </span>
-                        <span className="drag-handle" aria-hidden="true">⠿</span>
+                        {!isLocked && <span className="drag-handle" aria-hidden="true">⠿</span>}
                     </li>
                 ))}
             </ul>
@@ -134,12 +221,13 @@ function GroupCard({ groupLetter, teams, onChange }) {
     );
 }
 
-function ThirdsSelector({ predictions, selectedThirds, onChange }) {
+function ThirdsSelector({ predictions, selectedThirds, onChange, isLocked }) {
     const allThirds = Object.entries(predictions)
         .map(([group, teams]) => ({ group, team: teams[2] }))
         .filter(({ team }) => team);
 
     const toggle = (group) => {
+        if (isLocked) return;
         if (selectedThirds.includes(group)) {
             onChange(selectedThirds.filter(g => g !== group));
         } else if (selectedThirds.length < TOTAL_THIRDS) {
@@ -150,12 +238,15 @@ function ThirdsSelector({ predictions, selectedThirds, onChange }) {
     const remaining = TOTAL_THIRDS - selectedThirds.length;
 
     return (
-        <div className="thirds-section">
+        <div className={`thirds-section ${isLocked ? 'thirds-section--locked' : ''}`}>
             <div className="thirds-header">
                 <div>
                     <h2 className="thirds-title">Third-placed qualifiers</h2>
                     <p className="thirds-sub">
-                        Pick <strong>{TOTAL_THIRDS}</strong> of the 12 third-placed teams to advance to the Round of 32.
+                        {isLocked
+                            ? <>Your 8 third-placed selections are locked in.</>
+                            : <>Pick <strong>{TOTAL_THIRDS}</strong> of the 12 third-placed teams to advance to the Round of 32.</>
+                        }
                     </p>
                 </div>
                 <div className={`thirds-counter ${remaining === 0 ? 'complete' : ''}`}>
@@ -163,16 +254,19 @@ function ThirdsSelector({ predictions, selectedThirds, onChange }) {
                     <span className="counter-denom">/ {TOTAL_THIRDS}</span>
                 </div>
             </div>
-            {remaining > 0 && (
+            {!isLocked && remaining > 0 && (
                 <p className="thirds-remaining">Select {remaining} more</p>
             )}
-            {remaining === 0 && (
+            {!isLocked && remaining === 0 && (
                 <p className="thirds-complete">✓ All third-place selections made</p>
+            )}
+            {isLocked && (
+                <p className="thirds-complete">🔒 Locked in</p>
             )}
             <div className="thirds-grid">
                 {allThirds.map(({ group, team }) => {
                     const selected = selectedThirds.includes(group);
-                    const disabled = !selected && selectedThirds.length >= TOTAL_THIRDS;
+                    const disabled = isLocked || (!selected && selectedThirds.length >= TOTAL_THIRDS);
                     return (
                         <button
                             key={group}
@@ -195,6 +289,8 @@ function ThirdsSelector({ predictions, selectedThirds, onChange }) {
 
 export default function GroupStagePredictions() {
     const navigate = useNavigate();
+    const { isLocked, days, hours, minutes, seconds } = useDeadlineCountdown();
+
     const [predictions, setPredictions] = useState(
         Object.fromEntries(Object.entries(GROUPS_DATA).map(([g, teams]) => [g, [...teams]]))
     );
@@ -238,7 +334,6 @@ export default function GroupStagePredictions() {
                         }
                     });
 
-                    // Fill any missing groups with default order
                     Object.keys(GROUPS_DATA).forEach(group => {
                         if (!loadedPredictions[group]) {
                             loadedPredictions[group] = [...GROUPS_DATA[group]];
@@ -259,6 +354,7 @@ export default function GroupStagePredictions() {
     }, [navigate]);
 
     const handleGroupChange = (groupLetter, newOrder) => {
+        if (isLocked) return;
         setPredictions(prev => ({ ...prev, [groupLetter]: newOrder }));
         setSaved(false);
     };
@@ -266,7 +362,7 @@ export default function GroupStagePredictions() {
     const isComplete = selectedThirds.length === TOTAL_THIRDS;
 
     const handleSave = async () => {
-        if (!isComplete) return;
+        if (!isComplete || isLocked) return;
 
         setSaving(true);
         setErrorMsg(null);
@@ -366,19 +462,22 @@ export default function GroupStagePredictions() {
                     </div>
                 </div>
 
+                {isLocked ? <LockedBanner /> : <DeadlineCountdown days={days} hours={hours} minutes={minutes} seconds={seconds} />}
+
                 <div className="gsp-legend-bar">
                     <span><span className="legend-pip" style={{ background: 'var(--qual-first)' }}></span>Qualifies (1st/2nd)</span>
                     <span><span className="legend-pip" style={{ background: 'var(--qual-third)' }}></span>3rd — pick below</span>
                     <span><span className="legend-pip" style={{ background: 'var(--qual-out)' }}></span>Eliminated</span>
                 </div>
 
-                <div className="groups-grid">
+                <div className={`groups-grid ${isLocked ? 'groups-grid--locked' : ''}`}>
                     {Object.entries(GROUPS_DATA).map(([letter, teams]) => (
                         <GroupCard
                             key={letter}
                             groupLetter={letter}
                             teams={predictions[letter] || teams}
                             onChange={handleGroupChange}
+                            isLocked={isLocked}
                         />
                     ))}
                 </div>
@@ -387,24 +486,36 @@ export default function GroupStagePredictions() {
                     predictions={predictions}
                     selectedThirds={selectedThirds}
                     onChange={setSelectedThirds}
+                    isLocked={isLocked}
                 />
 
                 <div className="gsp-save-bar">
-                    {!isComplete && (
-                        <p className="save-hint">
-                            Select all {TOTAL_THIRDS} third-place qualifiers to save your predictions.
-                        </p>
+                    {isLocked ? (
+                        <div className="save-locked-message">
+                            <p className="save-locked-title">🏟️ The group stage is underway!</p>
+                            <p className="save-locked-sub">
+                                Your predictions are locked in. Come back once the group stage is complete
+                                to predict the <strong>Round of 32</strong>.
+                            </p>
+                        </div>
+                    ) : (
+                        <>
+                            {!isComplete && (
+                                <p className="save-hint">
+                                    Select all {TOTAL_THIRDS} third-place qualifiers to save your predictions.
+                                </p>
+                            )}
+                            {errorMsg && <p className="save-error">{errorMsg}</p>}
+                            {saved && <p className="save-success">✓ Predictions updated successfully!</p>}
+                            <button
+                                className={`btn-save ${isComplete ? 'ready' : ''}`}
+                                onClick={handleSave}
+                                disabled={!isComplete || saving}
+                            >
+                                {saving ? 'Saving…' : buttonText}
+                            </button>
+                        </>
                     )}
-                    {errorMsg && <p className="save-error">{errorMsg}</p>}
-                    {saved && <p className="save-success">✓ Predictions updated successfully!</p>}
-
-                    <button
-                        className={`btn-save ${isComplete ? 'ready' : ''}`}
-                        onClick={handleSave}
-                        disabled={!isComplete || saving}
-                    >
-                        {saving ? 'Saving…' : buttonText}
-                    </button>
                 </div>
             </main>
         </div>

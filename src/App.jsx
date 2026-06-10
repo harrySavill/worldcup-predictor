@@ -9,11 +9,13 @@ import CreateLeague from './pages/CreateLeague.jsx'
 import JoinLeague from './pages/JoinLeague.jsx'
 import Leagues from "./pages/Leagues.jsx";
 import GroupStagePredictions from "./pages/GroupStagePredictions.jsx";
+import LeagueDetail from "./pages/LeagueDetail.jsx";
+import ViewGroupStagePredictions from "./pages/ViewGroupStagePredictions.jsx";
 
 function App() {
   return (
       <Routes>
-        <Route path="/" element={<Register />} />
+        <Route path="/" element={<Login />} />
         <Route path="/register" element={<Register />} />
         <Route path="/login" element={<Login />} />
         <Route path="/forgotPassword" element={<ForgotPassword />}  />
@@ -23,6 +25,8 @@ function App() {
         <Route path="/leagues/create" element={<CreateLeague />} />
         <Route path="/leagues/join" element={<JoinLeague />} />
         <Route path="/predictions" element={<GroupStagePredictions />} />
+        <Route path="/leagues/:leagueId" element={<LeagueDetail />} />
+        <Route path="/predictions/groupstage/:userId" element={<ViewGroupStagePredictions />} />
       </Routes>
   )
 }
