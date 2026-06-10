@@ -113,9 +113,6 @@ export default function Login() {
                             Sign up
                         </Link>
                     </p>
-                    <Link to="/" className="back-link">
-                        ← Back to home
-                    </Link>
                 </div>
             </div>
         </div>
