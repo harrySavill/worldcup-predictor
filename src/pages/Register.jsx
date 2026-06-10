@@ -63,53 +63,7 @@ export default function Register() {
         }
 
         setLoading(false)
-        navigate('/login')
-    }async function handleSignUp(e) {
-        e.preventDefault()
-        setLoading(true)
-        setErrorMsg(null)
-
-        if (password !== confirmedPassword) {
-            setErrorMsg("Passwords don't match")
-            setLoading(false)
-            return
-        }
-
-        if (username.length < 3) {
-            setErrorMsg("Username must be at least 3 characters")
-            setLoading(false)
-            return
-        }
-
-        const { data, error } = await supabase.auth.signUp({
-            email,
-            password,
-            options: {
-                data: { username }
-            }
-        })
-
-        if (error) {
-            setErrorMsg(error.message)
-            setLoading(false)
-            return
-        }
-
-
-        if (data.user && !data.session) {
-            setErrorMsg('This email is already registered. Please log in.')
-            setLoading(false)
-            return
-        }
-
-
-        setLoading(false)
-
-        if (data.session) {
-            navigate('/dashboard')
-        } else {
-            setErrorMsg('Check your email to confirm your account')
-        }
+        setErrorMsg('Account created! Check your email to confirm your account before logging in.')
     }
 
     return (
