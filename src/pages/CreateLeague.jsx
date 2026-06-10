@@ -35,7 +35,7 @@ export default function CreateLeague() {
                 .insert({
                     name: leagueName.trim(),
                     owner_id: user.id,
-                });
+                }).select().single();
 
             if (error) throw error;
 
