@@ -6,7 +6,7 @@ import Header from './Header';
 import './styles/GroupStagePredictions.css';
 
 // Predictions lock: 6:30pm BST (UTC+1) on June 11th 2026 = 17:30 UTC
-const PREDICTION_DEADLINE = new Date('2026-06-11T17:30:00Z');
+const PREDICTION_DEADLINE = new Date('2026-06-11T18:30:00Z');
 
 // 2026 FIFA World Cup groups
 const GROUPS_DATA = {
