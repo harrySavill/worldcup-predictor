@@ -62,7 +62,7 @@ export default function Header({ activeLink = '' }) {
                         Dashboard
                     </Link>
                     <Link
-                        to="/predictions"
+                        to="/predictionsMenu"
                         className={`nav-link ${activeLink === 'predictions' ? 'active' : ''}`}
                         onClick={closeMenu}
                     >
@@ -107,7 +107,7 @@ export default function Header({ activeLink = '' }) {
                         Dashboard
                     </Link>
                     <Link
-                        to="/predictions"
+                        to="/predictionsMenu"
                         className={`mobile-nav-link ${activeLink === 'predictions' ? 'active' : ''}`}
                         onClick={closeMenu}
                     >

@@ -55,7 +55,7 @@ export default function Dashboard() {
 
                 {/* Primary action cards */}
                 <section className="dashboard-cards">
-                    <Link to="/predictions" className="dash-card dash-card--primary">
+                    <Link to="/predictionsMenu" className="dash-card dash-card--primary">
                         <div className="dash-card-icon">🎯</div>
                         <div className="dash-card-body">
                             <h2>Make Predictions</h2>
