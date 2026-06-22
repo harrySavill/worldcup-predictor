@@ -5,6 +5,7 @@ import { supabase } from '../lib/supabaseClient';
 import Header from './Header';
 import './styles/GroupStagePredictions.css';
 import { deadlines } from "../lib/deadline.js";
+import { FLAGS } from "../lib/flags.js";
 
 // Predictions lock: 6:30pm BST (UTC+1) on June 11th 2026 = 17:30 UTC
 const PREDICTION_DEADLINE = deadlines.groupStage.predictionLock;
@@ -23,22 +24,6 @@ const GROUPS_DATA = {
     J: ['Argentina', 'Algeria', 'Austria', 'Jordan'],
     K: ['Portugal', 'DR Congo', 'Uzbekistan', 'Colombia'],
     L: ['England', 'Croatia', 'Ghana', 'Panama'],
-};
-
-// Country flag emojis
-const FLAGS = {
-    'Mexico': '🇲🇽', 'South Africa': '🇿🇦', 'South Korea': '🇰🇷', 'Czechia': '🇨🇿',
-    'Canada': '🇨🇦', 'Bosnia & Herzegovina': '🇧🇦', 'Qatar': '🇶🇦', 'Switzerland': '🇨🇭',
-    'Brazil': '🇧🇷', 'Morocco': '🇲🇦', 'Haiti': '🇭🇹', 'Scotland': '🏴󠁧󠁢󠁳󠁣󠁴󠁿',
-    'USA': '🇺🇸', 'Paraguay': '🇵🇾', 'Australia': '🇦🇺', 'Turkey': '🇹🇷',
-    'Germany': '🇩🇪', 'Curacao': '🇨🇼', 'Ivory Coast': '🇨🇮', 'Ecuador': '🇪🇨',
-    'Netherlands': '🇳🇱', 'Japan': '🇯🇵', 'Sweden': '🇸🇪', 'Tunisia': '🇹🇳',
-    'Belgium': '🇧🇪', 'Egypt': '🇪🇬', 'Iran': '🇮🇷', 'New Zealand': '🇳🇿',
-    'Spain': '🇪🇸', 'Cape Verde': '🇨🇻', 'Saudi Arabia': '🇸🇦', 'Uruguay': '🇺🇾',
-    'France': '🇫🇷', 'Senegal': '🇸🇳', 'Iraq': '🇮🇶', 'Norway': '🇳🇴',
-    'Argentina': '🇦🇷', 'Algeria': '🇩🇿', 'Austria': '🇦🇹', 'Jordan': '🇯🇴',
-    'Portugal': '🇵🇹', 'DR Congo': '🇨🇩', 'Uzbekistan': '🇺🇿', 'Colombia': '🇨🇴',
-    'England': '🏴󠁧󠁢󠁥󠁮󠁧󠁿', 'Croatia': '🇭🇷', 'Ghana': '🇬🇭', 'Panama': '🇵🇦',
 };
 
 const TOTAL_THIRDS = 8;

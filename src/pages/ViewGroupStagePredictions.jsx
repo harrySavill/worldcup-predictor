@@ -4,6 +4,7 @@ import { useParams, useNavigate } from 'react-router-dom';
 import { supabase } from '../lib/supabaseClient';
 import Header from './Header';
 import './styles/ViewGroupStagePredictions.css';
+import { FLAGS } from "../lib/flags.js";
 
 // 2026 FIFA World Cup groups — same source of truth as the predictions page
 const GROUPS_DATA = {
@@ -19,21 +20,6 @@ const GROUPS_DATA = {
     J: ['Argentina', 'Algeria', 'Austria', 'Jordan'],
     K: ['Portugal', 'DR Congo', 'Uzbekistan', 'Colombia'],
     L: ['England', 'Croatia', 'Ghana', 'Panama'],
-};
-
-const FLAGS = {
-    'Mexico': '🇲🇽', 'South Africa': '🇿🇦', 'South Korea': '🇰🇷', 'Czechia': '🇨🇿',
-    'Canada': '🇨🇦', 'Bosnia & Herzegovina': '🇧🇦', 'Qatar': '🇶🇦', 'Switzerland': '🇨🇭',
-    'Brazil': '🇧🇷', 'Morocco': '🇲🇦', 'Haiti': '🇭🇹', 'Scotland': '🏴󠁧󠁢󠁳󠁣󠁴󠁿',
-    'USA': '🇺🇸', 'Paraguay': '🇵🇾', 'Australia': '🇦🇺', 'Turkey': '🇹🇷',
-    'Germany': '🇩🇪', 'Curacao': '🇨🇼', 'Ivory Coast': '🇨🇮', 'Ecuador': '🇪🇨',
-    'Netherlands': '🇳🇱', 'Japan': '🇯🇵', 'Sweden': '🇸🇪', 'Tunisia': '🇹🇳',
-    'Belgium': '🇧🇪', 'Egypt': '🇪🇬', 'Iran': '🇮🇷', 'New Zealand': '🇳🇿',
-    'Spain': '🇪🇸', 'Cape Verde': '🇨🇻', 'Saudi Arabia': '🇸🇦', 'Uruguay': '🇺🇾',
-    'France': '🇫🇷', 'Senegal': '🇸🇳', 'Iraq': '🇮🇶', 'Norway': '🇳🇴',
-    'Argentina': '🇦🇷', 'Algeria': '🇩🇿', 'Austria': '🇦🇹', 'Jordan': '🇯🇴',
-    'Portugal': '🇵🇹', 'DR Congo': '🇨🇩', 'Uzbekistan': '🇺🇿', 'Colombia': '🇨🇴',
-    'England': '🏴󠁧󠁢󠁥󠁮󠁧󠁿', 'Croatia': '🇭🇷', 'Ghana': '🇬🇭', 'Panama': '🇵🇦',
 };
 
 const TOTAL_THIRDS = 8;
@@ -216,7 +202,7 @@ export default function ViewGroupStagePredictions() {
                         {isOwnProfile && (
                             <button
                                 className="btn primary"
-                                onClick={() => navigate('/predictions')}
+                                onClick={() => navigate('/GroupStagePredictions')}
                             >
                                 Make your predictions
                             </button>
@@ -252,7 +238,7 @@ export default function ViewGroupStagePredictions() {
                     {isOwnProfile && (
                         <button
                             className="vgsp-edit-btn"
-                            onClick={() => navigate('/predictions')}
+                            onClick={() => navigate('/GroupStagePredictions')}
                         >
                             Edit predictions
                         </button>
