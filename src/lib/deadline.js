@@ -6,7 +6,7 @@ export const deadlines = {
         roundComplete:  new Date('2026-06-25T21:00:00Z'),
     },
     ro32: {
-        predictionLock: new Date('2026-06-28T14:00:00Z'),
+        predictionLock: new Date('2026-06-29T16:00:00Z'),
         roundComplete:  new Date('2026-07-02T21:00:00Z'),
     },
     ro16: {
