@@ -32,7 +32,7 @@ const stages = [
         icon: '⚔️',
         label: 'Round of 32',
         description: 'Pick the 16 sides who progress from the opening knockout round.',
-        to: '',
+        to: '/predictions/knockout/R32',
         status: !groupStageComplete ? 'unavailable' : ro32Locked ? 'done' : 'open',
     },
     {
@@ -40,7 +40,7 @@ const stages = [
         icon: '🎯',
         label: 'Round of 16',
         description: 'Choose who makes it through to the quarter-finals.',
-        to: '',
+        to: '/predictions/knockout/R16',
         status: !ro32Complete ? 'unavailable' : ro16Locked ? 'done' : 'open',
     },
     {
@@ -48,7 +48,7 @@ const stages = [
         icon: '🏅',
         label: 'Quarter-Finals',
         description: 'Predict the last eight standing.',
-        to: '',
+        to: '/predictions/knockout/QF',
         status: !ro16Complete ? 'unavailable' : qfLocked ? 'done' : 'open',
     },
     {
@@ -56,7 +56,7 @@ const stages = [
         icon: '🔥',
         label: 'Semi-Finals',
         description: 'Who makes it to the final weekend?',
-        to: '',
+        to: '/predictions/knockout/SF',
         status: !qfComplete ? 'unavailable' : sfLocked ? 'done' : 'open',
     },
     {
@@ -64,7 +64,7 @@ const stages = [
         icon: '🏆',
         label: 'Final & Third Place',
         description: 'Crown your World Cup champion and pick the bronze medal match result.',
-        to: '',
+        to: '/predictions/knockout/F',
         status: !sfComplete ? 'unavailable' : finalLocked ? 'done' : 'open',
     },
 ];

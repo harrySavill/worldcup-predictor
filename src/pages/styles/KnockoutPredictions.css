@@ -1,0 +1,702 @@
+/* src/pages/styles/KnockoutPredictions.css */
+
+/* ── Page shell ─────────────────────────────────────────────────── */
+.ko-page {
+    min-height: 100vh;
+    background: var(--bg-dark);
+    color: var(--text-primary);
+}
+
+.ko-main {
+    max-width: 860px;
+    margin: 0 auto;
+    padding: 3rem 1.5rem 6rem;
+    display: flex;
+    flex-direction: column;
+    gap: 2.5rem;
+}
+
+/* ── Hero ────────────────────────────────────────────────────────── */
+.ko-hero {
+    border-bottom: 1px solid var(--border-color);
+    padding-bottom: 2rem;
+}
+
+.ko-eyebrow {
+    font-size: 0.78rem;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.12em;
+    color: var(--accent);
+    margin-bottom: 0.5rem;
+}
+
+.ko-title {
+    font-size: clamp(1.9rem, 4vw, 2.8rem);
+    font-weight: 800;
+    line-height: 1.1;
+    margin-bottom: 0.75rem;
+    letter-spacing: -0.02em;
+}
+
+.ko-sub {
+    font-size: 1rem;
+    color: var(--text-muted);
+    max-width: 540px;
+    line-height: 1.65;
+    margin-bottom: 1.75rem;
+}
+
+.ko-stats-row {
+    display: flex;
+    gap: 2.5rem;
+}
+
+.ko-stat {
+    display: flex;
+    flex-direction: column;
+    gap: 0.25rem;
+}
+
+.ko-stat-num {
+    font-size: 2rem;
+    font-weight: 800;
+    color: var(--accent);
+    line-height: 1;
+}
+
+.ko-stat-label {
+    font-size: 0.78rem;
+    text-transform: uppercase;
+    letter-spacing: 0.06em;
+    color: var(--text-muted);
+}
+
+/* ── Deadline banner ─────────────────────────────────────────────── */
+.ko-banner {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+    padding: 1rem 1.5rem;
+    border-radius: 12px;
+    border: 1px solid;
+    flex-wrap: wrap;
+}
+
+.ko-banner--open {
+    background: rgba(44, 255, 143, 0.06);
+    border-color: rgba(44, 255, 143, 0.25);
+}
+
+.ko-banner--locked {
+    background: rgba(255, 107, 107, 0.07);
+    border-color: rgba(255, 107, 107, 0.3);
+}
+
+.ko-banner-icon {
+    font-size: 1.3rem;
+    flex-shrink: 0;
+}
+
+.ko-deadline-label {
+    font-size: 0.82rem;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.07em;
+    color: var(--text-muted);
+    flex-shrink: 0;
+}
+
+.ko-timer {
+    display: flex;
+    align-items: center;
+    gap: 0.25rem;
+}
+
+.ko-tu {
+    display: flex;
+    align-items: baseline;
+    gap: 0.15rem;
+}
+
+.ko-tn {
+    font-size: 1.4rem;
+    font-weight: 800;
+    color: var(--accent);
+    font-variant-numeric: tabular-nums;
+    line-height: 1;
+}
+
+.ko-ts {
+    font-size: 0.7rem;
+    color: var(--text-muted);
+    font-weight: 600;
+    text-transform: uppercase;
+}
+
+.ko-sep {
+    font-size: 1.2rem;
+    font-weight: 700;
+    color: var(--text-muted);
+    margin: 0 0.1rem;
+    line-height: 1;
+    align-self: flex-start;
+    margin-top: 2px;
+}
+
+.ko-deadline-date {
+    font-size: 0.8rem;
+    color: var(--text-muted);
+    margin-left: auto;
+    white-space: nowrap;
+}
+
+.ko-locked-text {
+    display: flex;
+    flex-direction: column;
+    gap: 0.25rem;
+}
+
+.ko-locked-text strong {
+    font-size: 0.95rem;
+    color: #ff8080;
+}
+
+.ko-locked-text span {
+    font-size: 0.88rem;
+    color: var(--text-muted);
+}
+
+/* ── Match list ──────────────────────────────────────────────────── */
+.ko-matches-list {
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+}
+
+/* ── Match card ──────────────────────────────────────────────────── */
+.ko-match-card {
+    background: var(--bg-secondary);
+    border: 1px solid var(--border-color);
+    border-radius: 14px;
+    padding: 1.25rem 1.5rem;
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+    transition: border-color 0.2s;
+}
+
+.ko-match-card--picked {
+    border-color: rgba(44, 255, 143, 0.3);
+}
+
+.ko-match-card--locked {
+    opacity: 0.85;
+}
+
+.ko-kickoff {
+    font-size: 0.75rem;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.07em;
+    color: var(--text-muted);
+    margin: 0;
+}
+
+/* ── Teams row ───────────────────────────────────────────────────── */
+.ko-teams-row {
+    display: grid;
+    grid-template-columns: 1fr auto 1fr;
+    align-items: center;
+    gap: 0.75rem;
+}
+
+/* ── Team button ─────────────────────────────────────────────────── */
+.ko-team-btn {
+    display: flex;
+    align-items: center;
+    gap: 0.6rem;
+    padding: 0.75rem 1rem;
+    background: var(--bg-dark);
+    border: 1.5px solid var(--border-color);
+    border-radius: 10px;
+    color: var(--text-primary);
+    cursor: pointer;
+    transition: all 0.15s;
+    font-size: 0.95rem;
+    font-weight: 500;
+    text-align: left;
+    min-width: 0;
+}
+
+.ko-team-btn:hover:not(:disabled) {
+    border-color: var(--accent);
+    background: rgba(44, 255, 143, 0.05);
+}
+
+.ko-team-btn--selected {
+    border-color: var(--accent);
+    background: rgba(44, 255, 143, 0.1);
+    font-weight: 700;
+}
+
+.ko-team-btn:disabled {
+    cursor: default;
+}
+
+/* Away button — mirror layout */
+.ko-team-btn--away {
+    flex-direction: row-reverse;
+    text-align: right;
+}
+
+.ko-team-flag {
+    font-size: 1.3rem;
+    flex-shrink: 0;
+    line-height: 1;
+}
+
+.ko-team-name {
+    flex: 1;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    min-width: 0;
+}
+
+.ko-tick {
+    font-size: 0.85rem;
+    color: var(--accent);
+    font-weight: 800;
+    flex-shrink: 0;
+}
+
+/* ── Score inputs ────────────────────────────────────────────────── */
+.ko-score-row {
+    display: flex;
+    align-items: center;
+    gap: 0.4rem;
+    flex-shrink: 0;
+}
+
+.ko-score-input {
+    width: 52px;
+    text-align: center;
+    padding: 0.6rem 0.4rem;
+    background: var(--bg-dark);
+    border: 1.5px solid var(--border-color);
+    border-radius: 8px;
+    color: var(--text-primary);
+    font-size: 1.1rem;
+    font-weight: 700;
+    transition: border-color 0.2s;
+    /* Hide spin arrows */
+    -moz-appearance: textfield;
+}
+
+.ko-score-input::-webkit-outer-spin-button,
+.ko-score-input::-webkit-inner-spin-button {
+    -webkit-appearance: none;
+    margin: 0;
+}
+
+.ko-score-input:focus {
+    outline: none;
+    border-color: var(--accent);
+    box-shadow: 0 0 0 3px rgba(44, 255, 143, 0.12);
+}
+
+.ko-score-input:disabled {
+    opacity: 0.55;
+    cursor: default;
+}
+
+.ko-score-input::placeholder {
+    color: var(--text-muted);
+    font-weight: 400;
+}
+
+.ko-score-sep {
+    font-size: 1.1rem;
+    font-weight: 700;
+    color: var(--text-muted);
+}
+
+/* ── Extra time / penalties row ──────────────────────────────────── */
+.ko-et-row {
+    display: flex;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 1rem;
+    padding-top: 0.5rem;
+    border-top: 1px solid var(--border-color);
+}
+
+/* Toggle switch */
+.ko-toggle {
+    display: flex;
+    align-items: center;
+    gap: 0.6rem;
+    cursor: pointer;
+    user-select: none;
+}
+
+.ko-toggle input {
+    position: absolute;
+    opacity: 0;
+    width: 0;
+    height: 0;
+}
+
+.ko-toggle-track {
+    position: relative;
+    width: 36px;
+    height: 20px;
+    background: var(--border-color);
+    border-radius: 10px;
+    transition: background 0.2s;
+    flex-shrink: 0;
+}
+
+.ko-toggle--on .ko-toggle-track {
+    background: var(--accent);
+}
+
+.ko-toggle-thumb {
+    position: absolute;
+    top: 3px;
+    left: 3px;
+    width: 14px;
+    height: 14px;
+    background: #fff;
+    border-radius: 50%;
+    transition: transform 0.2s;
+}
+
+.ko-toggle--on .ko-toggle-thumb {
+    transform: translateX(16px);
+}
+
+.ko-toggle-label {
+    font-size: 0.88rem;
+    font-weight: 500;
+    color: var(--text-muted);
+}
+
+.ko-toggle--on .ko-toggle-label {
+    color: var(--text-primary);
+}
+
+.ko-toggle--locked {
+    cursor: default;
+    opacity: 0.6;
+}
+
+/* Penalty winner picker */
+.ko-pen-winner {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+}
+
+.ko-pen-label {
+    font-size: 0.78rem;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.07em;
+    color: var(--text-muted);
+}
+
+.ko-pen-btns {
+    display: flex;
+    gap: 0.6rem;
+    flex-wrap: wrap;
+}
+
+.ko-pen-btn {
+    display: flex;
+    align-items: center;
+    gap: 0.4rem;
+    padding: 0.5rem 1rem;
+    background: var(--bg-dark);
+    border: 1.5px solid var(--border-color);
+    border-radius: 8px;
+    color: var(--text-primary);
+    font-size: 0.88rem;
+    font-weight: 500;
+    cursor: pointer;
+    transition: all 0.15s;
+}
+
+.ko-pen-btn:hover:not(:disabled) {
+    border-color: var(--accent);
+}
+
+.ko-pen-btn--on {
+    border-color: var(--accent);
+    background: rgba(44, 255, 143, 0.1);
+    font-weight: 700;
+    color: var(--accent);
+}
+
+.ko-pen-btn:disabled {
+    cursor: default;
+    opacity: 0.6;
+}
+
+/* ── Winner chip ─────────────────────────────────────────────────── */
+.ko-winner-chip {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    padding: 0.5rem 0.9rem;
+    background: rgba(44, 255, 143, 0.07);
+    border: 1px solid rgba(44, 255, 143, 0.2);
+    border-radius: 8px;
+    align-self: flex-start;
+}
+
+.ko-winner-flag {
+    font-size: 1rem;
+    line-height: 1;
+}
+
+.ko-winner-name {
+    font-size: 0.85rem;
+    font-weight: 600;
+    color: var(--accent);
+}
+
+.ko-winner-tag {
+    font-size: 0.72rem;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+    color: var(--text-muted);
+    background: var(--border-color);
+    padding: 0.15rem 0.45rem;
+    border-radius: 4px;
+}
+
+/* ── Save bar ────────────────────────────────────────────────────── */
+.ko-save-bar {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 0.75rem;
+    padding: 2rem;
+    background: var(--bg-secondary);
+    border: 1px solid var(--border-color);
+    border-radius: 14px;
+    text-align: center;
+}
+
+.ko-save-hint {
+    font-size: 0.9rem;
+    color: var(--text-muted);
+    margin: 0;
+}
+
+.ko-save-error {
+    color: #ff6b6b;
+    font-size: 0.9rem;
+    margin: 0;
+}
+
+.ko-save-success {
+    color: var(--accent);
+    font-size: 0.9rem;
+    font-weight: 600;
+    margin: 0;
+}
+
+.ko-save-btn {
+    padding: 0.9rem 3rem;
+    border-radius: 10px;
+    font-size: 1rem;
+    font-weight: 700;
+    letter-spacing: 0.02em;
+    cursor: pointer;
+    border: 1.5px solid var(--border-color);
+    background: var(--bg-dark);
+    color: var(--text-muted);
+    transition: all 0.2s;
+}
+
+.ko-save-btn--ready {
+    background: var(--accent);
+    border-color: var(--accent);
+    color: #0b0f14;
+}
+
+.ko-save-btn--ready:hover:not(:disabled) {
+    background: var(--accent-hover);
+    transform: translateY(-1px);
+    box-shadow: 0 6px 20px rgba(44, 255, 143, 0.3);
+}
+
+.ko-save-btn:disabled {
+    cursor: not-allowed;
+    opacity: 0.5;
+}
+
+.ko-save-locked {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 0.5rem;
+}
+
+.ko-save-locked-title {
+    font-size: 1.1rem;
+    font-weight: 700;
+    color: var(--text-primary);
+    margin: 0;
+}
+
+.ko-save-locked-sub {
+    font-size: 0.92rem;
+    color: var(--text-muted);
+    max-width: 420px;
+    line-height: 1.6;
+    text-align: center;
+    margin: 0;
+}
+
+.ko-save-locked-sub strong {
+    color: var(--accent);
+}
+
+/* ── Empty state ─────────────────────────────────────────────────── */
+.ko-empty {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 1rem;
+    padding: 5rem 2rem;
+    background: var(--bg-secondary);
+    border: 1px dashed var(--border-color);
+    border-radius: 14px;
+    text-align: center;
+}
+
+.ko-empty-icon {
+    font-size: 3rem;
+    line-height: 1;
+}
+
+.ko-empty h2 {
+    font-size: 1.4rem;
+    font-weight: 700;
+    margin: 0;
+}
+
+.ko-empty p {
+    color: var(--text-muted);
+    font-size: 0.95rem;
+    max-width: 380px;
+    margin: 0;
+}
+
+/* ── Loading shimmer ─────────────────────────────────────────────── */
+.ko-shimmer-list {
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+}
+
+.ko-shimmer {
+    height: 110px;
+    border-radius: 14px;
+    background: linear-gradient(
+            90deg,
+            var(--bg-secondary) 25%,
+            var(--border-color) 50%,
+            var(--bg-secondary) 75%
+    );
+    background-size: 200% 100%;
+    animation: ko-shimmer 1.4s infinite;
+}
+
+@keyframes ko-shimmer {
+    0%   { background-position: 200% 0; }
+    100% { background-position: -200% 0; }
+}
+
+/* ── Responsive ──────────────────────────────────────────────────── */
+@media (max-width: 700px) {
+    .ko-main {
+        padding: 2rem 1rem 5rem;
+        gap: 2rem;
+    }
+
+    .ko-teams-row {
+        grid-template-columns: 1fr auto 1fr;
+        gap: 0.5rem;
+    }
+
+    .ko-team-btn {
+        padding: 0.65rem 0.75rem;
+        font-size: 0.85rem;
+        gap: 0.4rem;
+    }
+
+    .ko-team-flag {
+        font-size: 1.1rem;
+    }
+
+    .ko-score-input {
+        width: 44px;
+        font-size: 1rem;
+        padding: 0.5rem 0.3rem;
+    }
+
+    .ko-match-card {
+        padding: 1rem 1.1rem;
+    }
+
+    .ko-banner {
+        gap: 0.75rem;
+        padding: 0.9rem 1.1rem;
+    }
+
+    .ko-deadline-date {
+        margin-left: 0;
+        width: 100%;
+    }
+
+    .ko-tn {
+        font-size: 1.2rem;
+    }
+
+    .ko-save-bar {
+        padding: 1.5rem 1rem;
+    }
+
+    .ko-save-btn {
+        width: 100%;
+        padding: 0.9rem 1.5rem;
+    }
+}
+
+@media (max-width: 420px) {
+    .ko-team-name {
+        display: none;
+    }
+
+    .ko-team-btn {
+        justify-content: center;
+    }
+
+    .ko-team-flag {
+        font-size: 1.6rem;
+    }
+}
+
+/* ── Toggle hint (shown when ET is locked because score is a draw) ── */
+.ko-toggle-hint {
+    font-size: 0.78rem;
+    color: var(--accent);
+    font-weight: 500;
+}
