@@ -1,7 +1,7 @@
 export const deadlines = {
     groupStage: {
         predictionLock: new Date('2026-06-11T18:30:00Z'),
-        roundComplete:  new Date('2026-06-25T21:00:00Z'),
+        roundComplete:  new Date('2026-06-28T07:00:00Z'),
     },
     ro32: {
         predictionLock: new Date('2026-06-28T17:30:00Z'),
