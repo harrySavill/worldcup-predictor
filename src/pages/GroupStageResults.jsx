@@ -69,9 +69,9 @@ function TeamResultRow({ row, position }) {
         if (predProgressor && actual_progressor) {
             progressorNote = { text: 'Progressor picked correctly +2', ok: true };
         } else if (predProgressor && !actual_progressor) {
-            progressorNote = { text: 'Picked to progress — eliminated', ok: false };
+            progressorNote = { text: 'Picked to progress - incorrect', ok: false };
         } else if (!predProgressor && actual_progressor) {
-            progressorNote = { text: 'Progressed — not picked', ok: false };
+            progressorNote = { text: 'Progressed - not picked', ok: false };
         }
     }
 
