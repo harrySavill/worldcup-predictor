@@ -13,26 +13,30 @@ import LeagueDetail from "./pages/LeagueDetail.jsx";
 import ViewGroupStagePredictions from "./pages/ViewGroupStagePredictions.jsx";
 import PredictionsMenu from "./pages/PredictionsMenu.jsx";
 import KnockoutPredictions from "./pages/KnockoutPredictions.jsx";
+import MemberMenu from "./pages/MemberMenu.jsx";
+import GroupStageResults from "./pages/GroupStageResults.jsx";
 
 function App() {
-      return (
-          <Routes>
-                <Route path="/" element={<Login />} />
-                <Route path="/register" element={<Register />} />
-                <Route path="/login" element={<Login />} />
-                <Route path="/forgotPassword" element={<ForgotPassword />}  />
-                <Route path="/update-password" element={<UpdatePassword />} />
-                <Route path="/dashboard" element={<Dashboard />} />
-                <Route path="leagues" element={<Leagues />} />
-                <Route path="/leagues/create" element={<CreateLeague />} />
-                <Route path="/leagues/join" element={<JoinLeague />} />
-                <Route path="/GroupStagePredictions" element={<GroupStagePredictions />} />
-                <Route path="/leagues/:leagueId" element={<LeagueDetail />} />
-                <Route path="/predictions/groupstage/:userId" element={<ViewGroupStagePredictions />} />
-                <Route path="/predictionsMenu" element={<PredictionsMenu />} />
-                <Route path="/predictions/knockout/:round" element={<KnockoutPredictions />} />
-          </Routes>
-      )
+    return (
+        <Routes>
+            <Route path="/" element={<Login />} />
+            <Route path="/register" element={<Register />} />
+            <Route path="/login" element={<Login />} />
+            <Route path="/forgotPassword" element={<ForgotPassword />}  />
+            <Route path="/update-password" element={<UpdatePassword />} />
+            <Route path="/dashboard" element={<Dashboard />} />
+            <Route path="leagues" element={<Leagues />} />
+            <Route path="/leagues/create" element={<CreateLeague />} />
+            <Route path="/leagues/join" element={<JoinLeague />} />
+            <Route path="/GroupStagePredictions" element={<GroupStagePredictions />} />
+            <Route path="/leagues/:leagueId" element={<LeagueDetail />} />
+            <Route path="/predictions/groupstage/:userId" element={<ViewGroupStagePredictions />} />
+            <Route path="/predictionsMenu" element={<PredictionsMenu />} />
+            <Route path="/predictions/knockout/:round" element={<KnockoutPredictions />} />
+            <Route path="/leagues/:leagueId/members/:userId" element={<MemberMenu />} />
+            <Route path="/leagues/:leagueId/members/:userId/groupstage" element={<GroupStageResults />} />
+        </Routes>
+    )
 }
 
 export default App

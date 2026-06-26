@@ -182,7 +182,7 @@ export default function LeagueDetail() {
                                     <li key={member.user_id}>
                                         <button
                                             className={`ld-member-row ${isCurrentUser ? 'ld-member-row--you' : ''}`}
-                                            onClick={() => navigate(`/predictions/groupstage/${member.user_id}`)}
+                                            onClick={() => navigate(`/leagues/${leagueId}/members/${member.user_id}`)}
                                         >
                                             <span className={`ld-rank ${cls}`}>{label}</span>
 

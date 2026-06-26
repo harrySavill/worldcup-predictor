@@ -1,0 +1,295 @@
+/* src/pages/styles/MemberMenu.css */
+
+.mm-page {
+    min-height: 100vh;
+    background: var(--bg-dark);
+    color: var(--text-primary);
+}
+
+.mm-main {
+    max-width: 640px;
+    margin: 0 auto;
+    padding: 2.5rem 2rem 6rem;
+    display: flex;
+    flex-direction: column;
+    gap: 1.75rem;
+}
+
+/* ── Back link ───────────────────────────────────────────────────── */
+.mm-back {
+    background: none;
+    border: none;
+    color: var(--text-muted);
+    font-size: 0.9rem;
+    font-weight: 500;
+    cursor: pointer;
+    padding: 0;
+    align-self: flex-start;
+    transition: color 0.2s;
+}
+
+.mm-back:hover {
+    color: var(--accent);
+}
+
+/* ── Hero ─────────────────────────────────────────────────────────── */
+.mm-hero {
+    display: flex;
+    align-items: center;
+    gap: 1.5rem;
+    padding: 1.75rem;
+    background: var(--bg-secondary);
+    border: 1px solid var(--border-color);
+    border-radius: 16px;
+}
+
+.mm-avatar {
+    width: 64px;
+    height: 64px;
+    border-radius: 50%;
+    background: rgba(44, 255, 143, 0.12);
+    border: 2px solid rgba(44, 255, 143, 0.3);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 1.6rem;
+    font-weight: 800;
+    color: var(--accent);
+    flex-shrink: 0;
+    font-family: system-ui, sans-serif;
+}
+
+.mm-hero-info {
+    flex: 1;
+    min-width: 0;
+}
+
+.mm-eyebrow {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    font-size: 0.78rem;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.1em;
+    color: var(--text-muted);
+    margin: 0 0 0.3rem;
+}
+
+.mm-you-badge {
+    background: rgba(44, 255, 143, 0.12);
+    color: var(--accent);
+    padding: 0.15rem 0.5rem;
+    border-radius: 20px;
+    font-size: 0.68rem;
+    font-weight: 700;
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+}
+
+.mm-title {
+    font-size: clamp(1.4rem, 4vw, 2rem);
+    font-weight: 800;
+    line-height: 1.1;
+    margin: 0 0 1rem;
+    letter-spacing: -0.02em;
+}
+
+/* ── Stats row ───────────────────────────────────────────────────── */
+.mm-stats-row {
+    display: flex;
+    align-items: center;
+    gap: 1.25rem;
+}
+
+.mm-stat {
+    display: flex;
+    flex-direction: column;
+    gap: 0.2rem;
+}
+
+.mm-stat-num {
+    font-size: 1.4rem;
+    font-weight: 800;
+    line-height: 1;
+    color: var(--text-primary);
+}
+
+.mm-stat-num.accent {
+    color: var(--accent);
+}
+
+.mm-stat-num.muted {
+    color: var(--text-muted);
+    font-size: 1.1rem;
+}
+
+.mm-stat-label {
+    font-size: 0.72rem;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.07em;
+    color: var(--text-muted);
+}
+
+.mm-stat-divider {
+    width: 1px;
+    height: 32px;
+    background: var(--border-color);
+    flex-shrink: 0;
+}
+
+/* ── Section label ───────────────────────────────────────────────── */
+.mm-section-label {
+    font-size: 0.75rem;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.1em;
+    color: var(--text-muted);
+    margin: 0;
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+}
+
+.mm-section-label::after {
+    content: '';
+    flex: 1;
+    height: 1px;
+    background: var(--border-color);
+}
+
+/* ── Nav cards ───────────────────────────────────────────────────── */
+.mm-cards {
+    display: flex;
+    flex-direction: column;
+    gap: 0.75rem;
+}
+
+.mm-card {
+    display: flex;
+    align-items: center;
+    gap: 1.25rem;
+    padding: 1.4rem 1.5rem;
+    background: var(--bg-secondary);
+    border: 1px solid var(--border-color);
+    border-radius: 14px;
+    cursor: pointer;
+    color: var(--text-primary);
+    text-align: left;
+    width: 100%;
+    transition: border-color 0.2s, box-shadow 0.2s, transform 0.15s;
+}
+
+.mm-card:hover:not(.mm-card--unavailable) {
+    border-color: var(--accent);
+    box-shadow: 0 0 0 1px var(--accent), 0 6px 20px rgba(44, 255, 143, 0.07);
+    transform: translateY(-2px);
+}
+
+.mm-card--unavailable {
+    cursor: not-allowed;
+    opacity: 0.45;
+}
+
+.mm-card-icon {
+    font-size: 1.9rem;
+    line-height: 1;
+    flex-shrink: 0;
+    width: 2.25rem;
+    text-align: center;
+}
+
+.mm-card-body {
+    flex: 1;
+    min-width: 0;
+}
+
+.mm-card-body h2 {
+    font-size: 1rem;
+    font-weight: 700;
+    margin: 0 0 0.2rem;
+    line-height: 1.25;
+}
+
+.mm-card-body p {
+    font-size: 0.875rem;
+    color: var(--text-muted);
+    line-height: 1.5;
+    margin: 0;
+}
+
+.mm-card-arrow {
+    font-size: 1.2rem;
+    color: var(--accent);
+    opacity: 0;
+    transition: opacity 0.2s, transform 0.2s;
+    flex-shrink: 0;
+}
+
+.mm-card:hover:not(.mm-card--unavailable) .mm-card-arrow {
+    opacity: 1;
+    transform: translateX(4px);
+}
+
+.mm-card-badge {
+    font-size: 0.68rem;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.06em;
+    padding: 0.25rem 0.6rem;
+    border-radius: 20px;
+    background: var(--border-color);
+    color: var(--text-muted);
+    flex-shrink: 0;
+}
+
+/* ── Error ───────────────────────────────────────────────────────── */
+.mm-error {
+    color: #ff6b6b;
+    background: rgba(255, 107, 107, 0.08);
+    padding: 0.75rem 1rem;
+    border-radius: 8px;
+    font-size: 0.9rem;
+}
+
+/* ── Loading shimmer ─────────────────────────────────────────────── */
+.mm-shimmer {
+    background: linear-gradient(
+            90deg,
+            var(--bg-secondary) 25%,
+            var(--border-color) 50%,
+            var(--bg-secondary) 75%
+    );
+    background-size: 200% 100%;
+    animation: mm-shimmer 1.4s infinite;
+    border-radius: 10px;
+}
+
+@keyframes mm-shimmer {
+    0%   { background-position: 200% 0; }
+    100% { background-position: -200% 0; }
+}
+
+.mm-shimmer--title { height: 40px; width: 50%; }
+.mm-shimmer--sub   { height: 20px; width: 30%; }
+.mm-shimmer--card  { height: 90px; }
+
+/* ── Responsive ──────────────────────────────────────────────────── */
+@media (max-width: 600px) {
+    .mm-main {
+        padding: 1.5rem 1.25rem 5rem;
+        gap: 1.25rem;
+    }
+
+    .mm-hero {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 1rem;
+        padding: 1.25rem;
+    }
+
+    .mm-title {
+        font-size: 1.5rem;
+    }
+}
