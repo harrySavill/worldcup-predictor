@@ -34,6 +34,7 @@ function App() {
             <Route path="/predictionsMenu" element={<PredictionsMenu />} />
             <Route path="/predictions/knockout/:round" element={<KnockoutPredictions />} />
             <Route path="/leagues/:leagueId/members/:userId" element={<MemberMenu />} />
+            <Route path="/predictions/groupstage/result" element={<GroupStageResults />} />
             <Route path="/leagues/:leagueId/members/:userId/groupstage" element={<GroupStageResults />} />
         </Routes>
     )

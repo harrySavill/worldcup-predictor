@@ -24,7 +24,7 @@ const stages = [
         icon: '🌍',
         label: 'Group Stage',
         description: 'Predict how every group finishes and which 8 third-placed sides advance.',
-        to: '/GroupStagePredictions',
+        to: '/predictions/groupstage/result',
         status: groupStageLocked ? 'done' : 'open',
     },
     {
