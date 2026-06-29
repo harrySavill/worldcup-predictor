@@ -102,10 +102,6 @@ function ScoreInput({ value, onChange, disabled }) {
 }
 
 // ── Score consistency logic ─────────────────────────────────────────────────
-// Given a score change, derives the correct winner and ET state.
-//   - Unequal scores → winner is whoever scored more; ET/pens cleared
-//   - Equal scores   → draw after 90, so ET is forced on; winner kept as-is
-//   - One or neither score present → no change to winner
 function applyScoreChange(pred, field, value, home_team, away_team) {
     const updated = { ...pred, [field]: value };
 
@@ -122,7 +118,6 @@ function applyScoreChange(pred, field, value, home_team, away_team) {
             updated.predicted_extra_time = false;
             updated.predicted_penalties = false;
         } else {
-            // Draw after 90 — ET and pens are both auto-selected
             updated.predicted_extra_time = true;
             updated.predicted_penalties = true;
         }
@@ -142,8 +137,6 @@ function MatchCard({ match, prediction, onChange, isLocked }) {
         pred.predicted_away_goals !== null &&
         pred.predicted_home_goals === pred.predicted_away_goals;
 
-    // Clicking a team button: if there's an unambiguous scoreline that disagrees,
-    // clear the scores rather than show a contradiction.
     const selectWinner = (team) => {
         if (isLocked) return;
         const update = { ...pred, predicted_winner: team };
@@ -174,7 +167,6 @@ function MatchCard({ match, prediction, onChange, isLocked }) {
         <div className={`ko-match-card ${homeSelected || awaySelected ? 'ko-match-card--picked' : ''} ${isLocked ? 'ko-match-card--locked' : ''}`}>
             {kickoff && <p className="ko-kickoff">{kickoff}</p>}
 
-            {/* Teams + score row */}
             <div className="ko-teams-row">
                 <button
                     className={`ko-team-btn ${homeSelected ? 'ko-team-btn--selected' : ''}`}
@@ -203,12 +195,6 @@ function MatchCard({ match, prediction, onChange, isLocked }) {
                 </button>
             </div>
 
-            {/*
-                ET / Penalties row.
-                Shown when:
-                  - A winner team button has been selected, OR
-                  - Scores are entered as a draw (ET is auto-on; user still needs to pick a winner via penalties)
-            */}
             {(homeSelected || awaySelected || scoresDraw) && (
                 <div className="ko-et-row">
                     <label className={`ko-toggle ${pred.predicted_extra_time ? 'ko-toggle--on' : ''} ${isLocked || scoresDraw ? 'ko-toggle--locked' : ''}`}>
@@ -221,7 +207,6 @@ function MatchCard({ match, prediction, onChange, isLocked }) {
                                 onChange(match_id, {
                                     ...pred,
                                     predicted_extra_time: et,
-                                    // Clearing ET also clears pens
                                     ...(et ? {} : { predicted_penalties: false }),
                                 });
                             }}
@@ -248,7 +233,6 @@ function MatchCard({ match, prediction, onChange, isLocked }) {
                 </div>
             )}
 
-            {/* Winner summary chip — only when a team is explicitly selected */}
             {(homeSelected || awaySelected) && (
                 <div className="ko-winner-chip">
                     <span className="ko-winner-flag">{FLAGS[pred.predicted_winner] || '🏳'}</span>
@@ -339,6 +323,8 @@ export default function KnockoutPredictions() {
                         predicted_away_goals: p.predicted_away_goals ?? null,
                         predicted_extra_time: !!p.predicted_extra_time,
                         predicted_penalties: !!p.predicted_penalties,
+                        // Note: id and points_awarded are intentionally omitted so
+                        // Postgres keeps the existing values on conflict.
                     };
                 });
 
@@ -348,8 +334,13 @@ export default function KnockoutPredictions() {
                 return;
             }
 
-            await supabase.from('knockout_predictions').delete().eq('user_id', user.id).eq('round', round);
-            const { error } = await supabase.from('knockout_predictions').insert(records);
+            const { error } = await supabase
+                .from('knockout_predictions')
+                .upsert(records, {
+                    onConflict: 'user_id,match_id',
+                    ignoreDuplicates: false,
+                });
+
             if (error) throw error;
 
             setSaved(true);
