@@ -15,6 +15,7 @@ import PredictionsMenu from "./pages/PredictionsMenu.jsx";
 import KnockoutPredictions from "./pages/KnockoutPredictions.jsx";
 import MemberMenu from "./pages/MemberMenu.jsx";
 import GroupStageResults from "./pages/GroupStageResults.jsx";
+import KnockoutResults from "./pages/KnockoutResults.jsx";
 
 function App() {
     return (
@@ -36,6 +37,7 @@ function App() {
             <Route path="/leagues/:leagueId/members/:userId" element={<MemberMenu />} />
             <Route path="/predictions/groupstage/result" element={<GroupStageResults />} />
             <Route path="/leagues/:leagueId/members/:userId/groupstage" element={<GroupStageResults />} />
+            <Route path="/leagues/:leagueId/members/:userId/knockout" element={<KnockoutResults />} />
         </Routes>
     )
 }

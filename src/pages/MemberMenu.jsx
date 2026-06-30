@@ -162,14 +162,17 @@ export default function MemberMenu() {
                         <span className="mm-card-arrow">→</span>
                     </button>
 
-                    <div className="mm-card mm-card--unavailable">
+                    <button
+                        className="mm-card"
+                        onClick={() => navigate(`/leagues/${leagueId}/members/${userId}/knockout`)}
+                    >
                         <span className="mm-card-icon">⚔️</span>
                         <div className="mm-card-body">
                             <h2>Knockout Rounds</h2>
-                            <p>Coming soon — unlocks once knockout predictions are available.</p>
+                            <p>See predictions and points breakdown for every knockout match.</p>
                         </div>
-                        <span className="mm-card-badge">Soon</span>
-                    </div>
+                        <span className="mm-card-arrow">→</span>
+                    </button>
                 </div>
             </main>
         </div>
