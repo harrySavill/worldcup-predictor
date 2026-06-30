@@ -30,8 +30,8 @@ function computeBreakdown(round, pred, match) {
         ok: winnerCorrect,
     });
 
-    if (winnerCorrect &&
-        pred.predicted_home_goals !== null && pred.predicted_away_goals !== null &&
+    // Scoreline bonus — independent of winner correctness
+    if (pred.predicted_home_goals !== null && pred.predicted_away_goals !== null &&
         match.home_goals !== null && match.home_goals !== undefined) {
         const exact = pred.predicted_home_goals === match.home_goals &&
             pred.predicted_away_goals === match.away_goals;
@@ -44,6 +44,8 @@ function computeBreakdown(round, pred, match) {
             items.push({ label: 'Correct goal difference', pts: 5, ok: true });
         }
     }
+
+    // ...rest unchanged
 
     const etCorrect = pred.predicted_extra_time === match.extra_time;
     items.push({
