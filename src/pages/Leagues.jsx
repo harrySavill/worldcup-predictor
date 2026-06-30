@@ -24,16 +24,17 @@ export default function Leagues() {
                 const { data, error } = await supabase
                     .from('league_members')
                     .select(`
-                        league_id,
-                        total_points,
-                        joined_at,
-                        leagues (
-                            id,
-                            name,
-                            owner_id,
-                            created_at
-                        )
-                    `)
+                                    league_id,
+                                    gs_points,
+                                    ko_points,
+                                    joined_at,
+                                    leagues (
+                                        id,
+                                        name,
+                                        owner_id,
+                                        created_at
+                                    )
+    `)
                     .eq('user_id', user.id)
                     .order('joined_at', { ascending: false });
 
@@ -59,7 +60,7 @@ export default function Leagues() {
                 setLeagues(
                     data.map(d => ({
                         ...d.leagues,
-                        total_points: d.total_points,
+                        total_points: d.gs_points + d.ko_points,
                         joined_at: d.joined_at,
                         member_count: memberCounts[d.league_id] || 1,
                     }))

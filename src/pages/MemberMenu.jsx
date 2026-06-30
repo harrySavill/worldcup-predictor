@@ -39,28 +39,32 @@ export default function MemberMenu() {
                 const { data: members, error: membersErr } = await supabase
                     .from('league_members')
                     .select(`
-                        user_id,
-                        total_points,
-                        profiles ( username )
-                    `)
-                    .eq('league_id', leagueId)
-                    .order('total_points', { ascending: false });
+                                    user_id,
+                                    gs_points,
+                                    ko_points,
+                                    profiles ( username )
+    `)
+                    .eq('league_id', leagueId);
 
                 if (membersErr) throw membersErr;
 
-                const idx = members.findIndex(m => m.user_id === userId);
+                const ranked = members
+                    .map(m => ({ ...m, total_points: m.gs_points + m.ko_points }))
+                    .sort((a, b) => b.total_points - a.total_points);
+
+                const idx = ranked.findIndex(m => m.user_id === userId);
                 if (idx === -1) {
                     setErrorMsg('Member not found in this league.');
                     setLoading(false);
                     return;
                 }
 
-                const m = members[idx];
+                const m = ranked[idx];
                 setMember({
                     username: m.profiles?.username || userId.slice(0, 8),
                     totalPoints: m.total_points,
                     rank: idx + 1,
-                    total: members.length,
+                    total: ranked.length,
                 });
             } catch (err) {
                 console.error(err);

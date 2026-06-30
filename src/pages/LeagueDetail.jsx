@@ -40,21 +40,26 @@ export default function LeagueDetail() {
                 const { data: membersData, error: membersError } = await supabase
                     .from('league_members')
                     .select(`
-                        user_id,
-                        total_points,
-                        joined_at,
-                        profiles (
-                            id,
-                            username
-                        )
-                    `)
+                                    user_id,
+                                    gs_points,
+                                    ko_points,
+                                    joined_at,
+                                    profiles (
+                                        id,
+                                        username
+                                    )
+    `)
                     .eq('league_id', leagueId)
-                    .order('total_points', { ascending: false });
+                    .order('gs_points', { ascending: false }); // see note below
 
                 if (membersError) throw membersError;
 
                 setLeague(leagueData);
-                setMembers(membersData || []);
+                setMembers(
+                    (membersData || [])
+                        .map(m => ({ ...m, total_points: m.gs_points + m.ko_points }))
+                        .sort((a, b) => b.total_points - a.total_points)
+                );
             } catch (err) {
                 console.error(err);
                 setErrorMsg('Failed to load league.');
