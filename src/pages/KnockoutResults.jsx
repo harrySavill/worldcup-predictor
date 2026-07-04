@@ -1,5 +1,5 @@
 // src/pages/KnockoutResults.jsx
-import { useState, useEffect } from 'react';
+import { useState, useEffect, useMemo } from 'react';
 import { useParams, useNavigate } from 'react-router-dom';
 import { supabase } from '../lib/supabaseClient';
 import Header from './Header';
@@ -13,7 +13,12 @@ const ROUND_META = {
     SF:  { label: 'Semi-Finals',    short: 'SF',  icon: '🔥', basePoints: 16 },
     F:   { label: 'Final',          short: 'F',   icon: '🏆', basePoints: 20 },
 };
+
+// Chronological order (how the tournament actually progresses)
 const ROUND_ORDER = ['R32', 'R16', 'QF', 'SF', 'F'];
+
+// Default display order — soonest/most-upcoming round first
+const DEFAULT_DISPLAY_ORDER = [...ROUND_ORDER].reverse(); // ['F', 'SF', 'QF', 'R16', 'R32']
 
 // ── Breakdown calculator — mirrors the SQL scoring logic, for display only ──
 function computeBreakdown(round, pred, match) {
@@ -30,7 +35,6 @@ function computeBreakdown(round, pred, match) {
         ok: winnerCorrect,
     });
 
-    // Scoreline bonus — independent of winner correctness
     if (pred.predicted_home_goals !== null && pred.predicted_away_goals !== null &&
         match.home_goals !== null && match.home_goals !== undefined) {
         const exact = pred.predicted_home_goals === match.home_goals &&
@@ -44,8 +48,6 @@ function computeBreakdown(round, pred, match) {
             items.push({ label: 'Correct goal difference', pts: 5, ok: true });
         }
     }
-
-    // ...rest unchanged
 
     const etCorrect = pred.predicted_extra_time === match.extra_time;
     items.push({
@@ -154,6 +156,37 @@ function RoundSection({ round, matches, predictions }) {
     );
 }
 
+// ── Round filter bar ─────────────────────────────────────────────
+function RoundFilterBar({ selectedRound, onSelect, roundsWithPredictions }) {
+    return (
+        <div className="kr-filter-bar" role="tablist" aria-label="Filter by round">
+            <button
+                type="button"
+                className={`kr-filter-btn ${selectedRound === 'ALL' ? 'kr-filter-btn--active' : ''}`}
+                onClick={() => onSelect('ALL')}
+            >
+                All rounds
+            </button>
+            {ROUND_ORDER.map(round => {
+                const meta = ROUND_META[round];
+                const hasData = roundsWithPredictions.has(round);
+                return (
+                    <button
+                        type="button"
+                        key={round}
+                        className={`kr-filter-btn ${selectedRound === round ? 'kr-filter-btn--active' : ''} ${!hasData ? 'kr-filter-btn--empty' : ''}`}
+                        onClick={() => onSelect(round)}
+                        disabled={!hasData}
+                        title={!hasData ? 'No predictions for this round yet' : undefined}
+                    >
+                        {meta.icon} {meta.short}
+                    </button>
+                );
+            })}
+        </div>
+    );
+}
+
 // ── Main page ───────────────────────────────────────────────────
 export default function KnockoutResults() {
     const { leagueId, userId } = useParams();
@@ -166,6 +199,7 @@ export default function KnockoutResults() {
     const [matches, setMatches] = useState([]);
     const [predictions, setPredictions] = useState({});
     const [hasPredictions, setHasPredictions] = useState(false);
+    const [selectedRound, setSelectedRound] = useState('ALL');
 
     useEffect(() => {
         async function load() {
@@ -174,7 +208,6 @@ export default function KnockoutResults() {
                 if (!user) { navigate('/login'); return; }
                 setIsOwnProfile(user.id === userId);
 
-                // Confirm this user is actually a member of the league being viewed from
                 const { data: membership, error: memErr } = await supabase
                     .from('league_members')
                     .select('user_id')
@@ -228,6 +261,20 @@ export default function KnockoutResults() {
         load();
     }, [leagueId, userId, navigate]);
 
+    // Which rounds actually have predictions — used to disable empty filter buttons
+    const roundsWithPredictions = useMemo(() => {
+        const set = new Set();
+        matches.forEach(m => {
+            if (predictions[m.match_id]) set.add(m.round);
+        });
+        return set;
+    }, [matches, predictions]);
+
+    // Rounds to render, in the right order for the current filter
+    const roundsToRender = selectedRound === 'ALL'
+        ? DEFAULT_DISPLAY_ORDER
+        : [selectedRound];
+
     if (loading) {
         return (
             <div className="kr-page">
@@ -273,6 +320,10 @@ export default function KnockoutResults() {
     const matchesPlayed = matches.filter(m => predictions[m.match_id] && m.winner).length;
     const matchesPicked = Object.keys(predictions).length;
 
+    const anyRoundsRendered = roundsToRender.some(round =>
+        matches.some(m => m.round === round && predictions[m.match_id])
+    );
+
     return (
         <div className="kr-page">
             <Header activeLink="leagues" />
@@ -307,7 +358,17 @@ export default function KnockoutResults() {
                     </div>
                 </div>
 
-                {ROUND_ORDER.map(round => (
+                <RoundFilterBar
+                    selectedRound={selectedRound}
+                    onSelect={setSelectedRound}
+                    roundsWithPredictions={roundsWithPredictions}
+                />
+
+                {!anyRoundsRendered && (
+                    <p className="kr-pending-text">No predictions for this round yet.</p>
+                )}
+
+                {roundsToRender.map(round => (
                     <RoundSection
                         key={round}
                         round={round}
