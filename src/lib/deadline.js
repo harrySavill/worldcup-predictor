@@ -14,7 +14,7 @@ export const deadlines = {
     },
     quarterFinals: {
 
-        predictionLock: new Date('2026-07-09T18:30:00Z'),
+        predictionLock: new Date('2026-07-09T20:40:00Z'),
         roundComplete:  new Date('2026-07-12T04:00:00Z'),
     },
     semiFinals: {
