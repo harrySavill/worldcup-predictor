@@ -19,7 +19,7 @@ export const deadlines = {
     },
     semiFinals: {
 
-        predictionLock: new Date('2026-07-14T18:00:00Z'),
+        predictionLock: new Date('2026-07-14T19:00:00Z'),
         roundComplete:  new Date('2026-07-15T22:00:00Z'),
     },
     final: {
